@@ -42,12 +42,11 @@ def solarEdge():
     x = datetime.datetime.strptime(startTime_, "%Y-%m-%d") 
     y =datetime.datetime.strptime(endTime_,"%Y-%m-%d" )
     
-     #en son aşamada oluşturulan listeye value değerlerini sonradan ekleyebilmek için oluşutduğum counter.
 
     for hour in response_["energyDetails"]["meters"][0]["values"]:
-        hour["date"] = datetime.datetime.strptime(hour["date"], date_format)#her date değerini üzerinde çalışılabilir datetime objesine dönüştürüyorum.
+        hour["date"] = datetime.datetime.strptime(hour["date"], date_format)
 
-    for hour in response_["energyDetails"]["meters"][0]["values"]: #for döngüsüyle her saatin içine giriyorum.
+    for hour in response_["energyDetails"]["meters"][0]["values"]: 
 
         if hour["date"].time() >= earliestTime and hour["date"].time() <= latestTime:
             if "value" not in hour:  #if value key doesnt appear that means there is an outage loss 
